@@ -76,7 +76,7 @@ export default function PauseMenu({ sections = defaultSections }: { sections?: S
 
           {/* Layer 2: title + menu */}
           <div className="pause__left">
-            <span className="pause__title boil">
+            <span className="pause__title">
               <RansomText text="Menu" seed={9} size={84} />
             </span>
             <StampMenu

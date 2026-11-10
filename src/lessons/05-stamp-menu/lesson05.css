@@ -1,0 +1,46 @@
+.l05__stage {
+  background-color: #1e1e1e;
+  border: 3px solid var(--p5-white);
+  padding: 32px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.l05__readout {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 15px;
+  min-width: 220px;
+}
+
+.l05__readout span {
+  color: var(--p5-gray);
+  display: inline-block;
+  width: 90px;
+}
+
+.l05__flash {
+  animation: l05-flash 500ms var(--ease-out);
+}
+
+@keyframes l05-flash {
+  0% {
+    background: var(--p5-red);
+    transform: scale(1.15);
+  }
+  100% {
+    background: transparent;
+    transform: scale(1);
+  }
+}
+
+kbd {
+  background: var(--p5-white);
+  color: var(--p5-black);
+  padding: 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+}

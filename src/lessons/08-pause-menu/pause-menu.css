@@ -1,0 +1,186 @@
+.pause {
+  position: relative;
+  height: 580px;
+  border: 3px solid var(--p5-white);
+  overflow: hidden;
+  background: #121212;
+}
+
+/* ---------- Closed state ---------- */
+.pause__scene {
+  height: 100%;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 16px;
+  color: var(--p5-gray);
+  background: radial-gradient(circle at 50% 120%, #3a0a0e, #0b0b0b 60%);
+}
+
+/* ---------- Open state: four stacked layers ---------- */
+.pause__menu {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(280px, 1.1fr);
+  align-items: center;
+  animation: p5-menu-open var(--dur-med) var(--ease-snap) both;
+}
+
+@keyframes p5-menu-open {
+  from {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+.pause__burst {
+  position: absolute;
+  width: 220%;
+  aspect-ratio: 1;
+  left: -60%;
+  top: 50%;
+  margin-top: -110%;
+  background: repeating-conic-gradient(var(--p5-red) 0deg 8deg, var(--p5-red-dark) 8deg 16deg);
+}
+
+.pause__dots {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+}
+
+/* A big black diagonal slab behind the menu, sliding in from the left. */
+.pause__slab {
+  position: absolute;
+  inset: 0 45% 0 -10%;
+  background: var(--p5-black);
+  clip-path: polygon(0 0, 100% 0, 72% 100%, 0 100%);
+  animation: p5-slab-in var(--dur-slow) var(--ease-slam) both;
+}
+
+@keyframes p5-slab-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.pause__left {
+  position: relative;
+  padding: 24px 0 24px 40px;
+  display: grid;
+  gap: 18px;
+  justify-items: start;
+}
+
+.pause__title {
+  transform-origin: left center;
+  margin-left: -8px;
+}
+
+/* Let the wipe stage fill the right column. */
+.pause__right {
+  position: relative;
+  height: 100%;
+  display: grid;
+  align-items: center;
+}
+
+.pause__right .wipe-stage__content {
+  padding: 24px 40px 24px 16px;
+}
+
+.pause__panel {
+  position: relative;
+}
+
+.pause__panelTitle {
+  font-family: var(--font-heavy);
+  font-size: 46px;
+  margin: 0 0 8px;
+  line-height: 1;
+}
+
+.pause__panelBody {
+  font-size: 17px;
+  margin: 0;
+  max-width: 34ch;
+}
+
+/* Confirm feedback: a red stamp slams onto the panel, then fades. */
+.pause__stamp {
+  position: absolute;
+  right: 4%;
+  bottom: -26px;
+  background: var(--p5-red);
+  color: var(--p5-white);
+  font-family: var(--font-heavy);
+  font-size: 28px;
+  padding: 2px 18px;
+  clip-path: polygon(4% 0, 100% 8%, 95% 100%, 0 90%);
+  animation: p5-stamp 900ms var(--ease-slam) both;
+  pointer-events: none;
+}
+
+@keyframes p5-stamp {
+  0% {
+    opacity: 0;
+    transform: scale(2.4) rotate(-20deg);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1) rotate(-6deg);
+  }
+  75% {
+    opacity: 1;
+    transform: scale(1) rotate(-6deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1) rotate(-6deg);
+  }
+}
+
+.pause__hints {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  display: flex;
+  gap: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 6px 12px;
+  background: var(--p5-black);
+  font-size: 13px;
+  transform: skewX(-10deg);
+}
+
+.pause__hints kbd {
+  background: var(--p5-white);
+  color: var(--p5-black);
+  padding: 0 6px;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .pause {
+    height: auto;
+    min-height: 760px;
+  }
+  .pause__menu {
+    grid-template-columns: 1fr;
+    align-content: start;
+  }
+  .pause__slab {
+    inset: 0 0 45% -10%;
+  }
+  .pause__right {
+    height: auto;
+    min-height: 260px;
+  }
+}

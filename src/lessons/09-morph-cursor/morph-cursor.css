@@ -1,0 +1,44 @@
+/*
+  One cursor shared by the whole menu. It GLIDES between items (transform/size
+  transition) while its two layers constantly MORPH (clip-path transition).
+*/
+.morph-cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--w);
+  height: var(--h);
+  transform: translate(var(--x), var(--y)) rotate(var(--tilt));
+  transition: transform 150ms var(--ease-slam), width 150ms var(--ease-slam), height 150ms var(--ease-slam);
+  pointer-events: none;
+  z-index: 0;
+  /* Keep the blend inside the cursor so it doesn't mix with the page behind it. */
+  isolation: isolate;
+}
+
+.morph-cursor__red,
+.morph-cursor__cyan {
+  position: absolute;
+  inset: 0;
+  /* Same point count every time, so the browser can interpolate between polygons. */
+  transition: clip-path var(--speed) linear;
+}
+
+.morph-cursor__red {
+  background: var(--p5-red);
+}
+
+/*
+  The trick from the reference pen: cyan on top with mix-blend-mode: screen.
+  Screen adds light: red + cyan = white where they overlap, pure red or cyan
+  where they don't. One blend mode gives three colors from two shapes.
+*/
+.morph-cursor__cyan {
+  background: #1cfeff;
+  mix-blend-mode: screen;
+}
+
+.morph-cursor--no-blend .morph-cursor__cyan {
+  mix-blend-mode: normal;
+  opacity: 0.85;
+}

@@ -1,6 +1,15 @@
-import { useRef, type CSSProperties, type KeyboardEvent } from "react";
+import { useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
 import "../04-slam-in/slam.css";
 import "./stamp-menu.css";
+
+/** Where the selected item sits inside the menu (px, relative to the <ul>). Used by Lesson 09's cursor. */
+export interface CursorBox {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  tilt: number;
+}
 
 export interface StampMenuProps {
   items: string[];
@@ -13,6 +22,11 @@ export interface StampMenuProps {
   animateIn?: boolean;
   /** Accessible name for the menu, e.g. "Main menu". */
   label?: string;
+  /**
+   * Lesson 09: instead of a stamp behind each item, render ONE shared cursor that
+   * slides to whichever item is selected. Receives the selected item's position.
+   */
+  renderCursor?: (box: CursorBox | null) => ReactNode;
 }
 
 // Fixed tilt + indent per row: a hand-placed look that never changes between renders.
@@ -31,8 +45,49 @@ export default function StampMenu({
   onConfirm,
   animateIn = false,
   label = "Menu",
+  renderCursor,
 }: StampMenuProps) {
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
+  const listRef = useRef<HTMLUListElement>(null);
+  const [box, setBox] = useState<CursorBox | null>(null);
+
+  // Lesson 09: measure the selected button so a shared cursor can move to it.
+  // useLayoutEffect runs after the DOM updates but before the browser paints,
+  // so the cursor never shows a frame in the wrong place.
+  const wantsCursor = Boolean(renderCursor);
+  useLayoutEffect(() => {
+    if (!wantsCursor) return;
+    const measure = () => {
+      const btn = buttons.current[selected];
+      const list = listRef.current;
+      if (!btn || !list) return;
+      // offsetLeft/Top are measured from the nearest "offsetParent". Any element
+      // with a transform (like a row mid slam-in) becomes one, so add up offsets
+      // until we reach the <ul>. Unlike getBoundingClientRect, this ignores
+      // rotations/skews, which is what we want for a stable cursor position.
+      let x = 0;
+      let y = 0;
+      let el: HTMLElement | null = btn;
+      while (el && el !== list) {
+        x += el.offsetLeft;
+        y += el.offsetTop;
+        el = el.offsetParent as HTMLElement | null;
+      }
+      setBox({
+        x,
+        y,
+        w: btn.offsetWidth,
+        h: btn.offsetHeight,
+        tilt: TILTS[selected % TILTS.length],
+      });
+    };
+    measure();
+    // Re-measure when the layout changes size or the web fonts finish loading.
+    const ro = new ResizeObserver(measure);
+    if (listRef.current) ro.observe(listRef.current);
+    document.fonts?.ready.then(measure);
+    return () => ro.disconnect();
+  }, [selected, items.length, wantsCursor]);
 
   const move = (to: number) => {
     const next = (to + items.length) % items.length; // wrap around top/bottom
@@ -55,7 +110,8 @@ export default function StampMenu({
 
   return (
     <nav aria-label={label}>
-      <ul className="stamp-menu" onKeyDown={onKeyDown}>
+      <ul ref={listRef} className={`stamp-menu ${renderCursor ? "has-cursor" : ""}`} onKeyDown={onKeyDown}>
+        {renderCursor?.(box)}
         {items.map((item, i) => {
           const isSelected = i === selected;
           const style = {

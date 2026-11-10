@@ -33,7 +33,7 @@ Other scripts:
 Each lesson is its own git commit with a tag, so you can watch the project grow:
 
 ```bash
-git tag                    # lesson-00 ... lesson-08
+git tag                    # lesson-00 ... lesson-09
 git checkout lesson-01     # the project as it was after Lesson 01
 npm run dev                # see just that lesson
 git checkout main          # back to the finished version
@@ -53,6 +53,7 @@ Each lesson folder has a `README.md` walkthrough (concept, analogy, key code, th
 | 06 | [Wipe transition](src/lessons/06-wipe-transition/README.md) | Sequencing animations with a state machine and `animationend` |
 | 07 | [Jitter & a11y](src/lessons/07-jitter-a11y/README.md) | `steps()` stop-motion, ambient motion, `prefers-reduced-motion` |
 | 08 | [Pause menu](src/lessons/08-pause-menu/README.md) | Composing everything; what to port to a real site |
+| 09 | [Morph cursor](src/lessons/09-morph-cursor/README.md) | A wobbling red/cyan cursor (`mix-blend-mode: screen`, interpolated `clip-path`), render props, hover/press animations. Upgrades the pause menu. |
 
 ---
 
@@ -114,6 +115,7 @@ Reusable components (the parts worth porting):
 | `WipeTransition` | `src/lessons/06-wipe-transition/WipeTransition.tsx` |
 | `usePrefersReducedMotion` + `motion-safety.css` | `src/lessons/07-jitter-a11y/` |
 | `PauseMenu` | `src/lessons/08-pause-menu/PauseMenu.tsx` |
+| `MorphCursor` | `src/lessons/09-morph-cursor/MorphCursor.tsx` |
 
 ---
 
@@ -127,4 +129,4 @@ Reusable components (the parts worth porting):
 
 ## Credits
 
-Visual style inspired by *Persona 5* (ATLUS / SEGA). This is an independent learning project. It contains no game art, fonts, sounds or code. Fonts are free Google Fonts.
+Visual style inspired by *Persona 5* (ATLUS / SEGA). The Lesson 09 cursor technique (two morphing polygons with a screen blend) comes from Daniel Dango's [Persona 5 Menu UI CodePen](https://codepen.io/dangodev/pen/qXdxOO), reimplemented here without its images or libraries. This is an independent learning project. It contains no game art, fonts, sounds or code. Fonts are free Google Fonts.

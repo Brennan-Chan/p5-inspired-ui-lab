@@ -3,6 +3,7 @@ import RansomText from "../03-ransom-text/RansomText";
 import JaggedPanel from "../02-jagged-panels/JaggedPanel";
 import StampMenu from "../05-stamp-menu/StampMenu";
 import WipeTransition from "../06-wipe-transition/WipeTransition";
+import MorphCursor from "../09-morph-cursor/MorphCursor";
 import "../07-jitter-a11y/motion-safety.css";
 import "../07-jitter-a11y/stop-motion.css";
 import "./pause-menu.css";
@@ -85,6 +86,7 @@ export default function PauseMenu({ sections = defaultSections }: { sections?: S
               onConfirm={() => setConfirmed((c) => c + 1)}
               animateIn
               label="Pause menu"
+              renderCursor={(box) => <MorphCursor box={box} />}
             />
           </div>
 

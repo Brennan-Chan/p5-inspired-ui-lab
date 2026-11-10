@@ -1,4 +1,5 @@
 .stamp-menu {
+  position: relative; /* buttons measure their offsetTop/Left from here (Lesson 09) */
   list-style: none;
   margin: 0;
   padding: 0;
@@ -31,7 +32,16 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--p5-white);
-  transition: transform var(--dur-fast) var(--ease-slam), color var(--dur-fast);
+  /* scale / rotate / translate are separate CSS properties, so the hover pop,
+     the tilt and the jitter below can all animate without overwriting each other */
+  transition: scale var(--dur-fast) var(--ease-slam), rotate var(--dur-fast) var(--ease-slam),
+    color var(--dur-fast);
+}
+
+/* Pressing down squashes the label slightly: tactile "click" feedback. */
+.stamp-menu__btn:active .stamp-menu__label {
+  scale: 1.05;
+  transition-duration: 60ms;
 }
 
 /* The two "stamps": a white one offset behind, and the red one on top of it. */
@@ -65,7 +75,37 @@
 
 .is-selected .stamp-menu__label {
   color: var(--p5-black);
-  transform: scale(1.18) rotate(-2deg);
+  scale: 1.18;
+  rotate: -2deg;
+  /* the selected label never sits still: a 2-frame stop-motion jitter (Lesson 07 idea) */
+  animation: p5-label-boil 280ms steps(1, end) infinite;
+}
+
+@keyframes p5-label-boil {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 1px -1px;
+  }
+}
+
+/* ---- Lesson 09: shared morphing cursor replaces the per-item stamps ---- */
+.has-cursor .stamp-menu__btn::before,
+.has-cursor .stamp-menu__btn::after {
+  display: none;
+}
+
+.has-cursor .stamp-menu__btn {
+  z-index: 1; /* labels above the cursor */
+}
+
+/* The morphing shape sometimes leaves a letter's edge uncovered; a thin white
+   halo keeps black text readable against the dark background when that happens. */
+.has-cursor .is-selected .stamp-menu__label {
+  text-shadow: 1px 1px 0 var(--p5-white), -1px -1px 0 var(--p5-white), 1px -1px 0 var(--p5-white),
+    -1px 1px 0 var(--p5-white);
 }
 
 /* Keyboard users still need a visible focus ring. */

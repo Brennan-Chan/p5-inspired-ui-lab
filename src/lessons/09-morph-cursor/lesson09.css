@@ -1,0 +1,20 @@
+.l09__field {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.l09__check {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 14px;
+  font-family: Consolas, "Courier New", monospace;
+}
+
+.l09__stage {
+  background-color: #1e1e1e;
+  border: 3px solid var(--p5-white);
+  padding: 36px 48px;
+  margin-bottom: 12px;
+}

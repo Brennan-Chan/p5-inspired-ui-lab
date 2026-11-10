@@ -1,0 +1,71 @@
+.wipe-stage {
+  position: relative;
+  overflow: hidden; /* hide the wedge while it's off to the sides */
+}
+
+.wipe {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Two slanted layers: black trails slightly behind red for depth. */
+.wipe__red,
+.wipe__black {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -25%;
+  right: -25%;
+  clip-path: polygon(18% 0, 100% 0, 82% 100%, 0 100%);
+}
+
+.wipe__red {
+  background: var(--p5-red);
+}
+
+.wipe__black {
+  background: var(--p5-black);
+  transform: translateX(-9%);
+}
+
+.wipe--cover {
+  animation: p5-wipe-in calc(var(--dur-med) * var(--slowmo, 1)) var(--ease-snap) both;
+}
+
+.wipe--reveal {
+  animation: p5-wipe-out calc(var(--dur-med) * var(--slowmo, 1)) var(--ease-snap) both;
+}
+
+@keyframes p5-wipe-in {
+  from {
+    transform: translateX(-160%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes p5-wipe-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(160%);
+  }
+}
+
+/* Small bonus: new content slams in slightly as the wedge leaves. */
+.wipe-stage__content > * {
+  animation: p5-content-pop calc(var(--dur-med) * var(--slowmo, 1)) var(--ease-slam) both;
+}
+
+@keyframes p5-content-pop {
+  from {
+    transform: scale(0.96) rotate(-1deg);
+  }
+  to {
+    transform: none;
+  }
+}

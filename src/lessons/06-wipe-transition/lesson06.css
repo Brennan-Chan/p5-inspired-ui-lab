@@ -1,0 +1,44 @@
+.l06 .btn[aria-pressed="true"] {
+  background: var(--p5-red);
+  color: var(--p5-white);
+}
+
+.l06__check {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 14px;
+}
+
+.l06__phase {
+  min-width: 120px;
+}
+
+.l06__phase--cover,
+.l06__phase--reveal {
+  background: var(--p5-red);
+}
+
+.l06__stage {
+  background-color: #262626;
+  border: 3px solid var(--p5-white);
+  min-height: 300px;
+  margin-bottom: 12px;
+}
+
+.l06__page {
+  padding: 48px 40px;
+  max-width: 560px;
+}
+
+.l06__title {
+  font-family: var(--font-heavy);
+  font-size: 44px;
+  margin: 0 0 8px;
+}
+
+.l06__body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  margin: 0;
+}

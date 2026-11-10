@@ -4,6 +4,7 @@ import Lesson02 from "./02-jagged-panels/Lesson02";
 import Lesson03 from "./03-ransom-text/Lesson03";
 import Lesson04 from "./04-slam-in/Lesson04";
 import Lesson05 from "./05-stamp-menu/Lesson05";
+import Lesson06 from "./06-wipe-transition/Lesson06";
 
 // The sidebar is generated from this list. Add a lesson = add one entry.
 export const lessons: Lesson[] = [
@@ -12,4 +13,5 @@ export const lessons: Lesson[] = [
   { id: "03", title: "Ransom text", folder: "03-ransom-text", Component: Lesson03, summary: "Split a word into letters and give each its own font, tilt and paper, with seeded randomness so it stays stable." },
   { id: "04", title: "Easing & slam-in", folder: "04-slam-in", Component: Lesson04, summary: "Why easing curves decide how motion feels, and a reusable staggered entrance animation." },
   { id: "05", title: "Stamp menu", folder: "05-stamp-menu", Component: Lesson05, summary: "Keyboard and mouse interaction: React state picks the item, CSS transitions slam the stamp in." },
+  { id: "06", title: "Wipe transition", folder: "06-wipe-transition", Component: Lesson06, summary: "Sequence cover → swap → reveal with a small state machine driven by animationend events." },
 ];

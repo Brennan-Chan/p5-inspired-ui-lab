@@ -1,0 +1,75 @@
+/*
+  Design tokens: every color, font and easing curve lives here as a CSS variable.
+  Change one value and every lesson updates. When you port pieces to your own
+  site, copy this block first — the components all read from these variables.
+*/
+:root {
+  /* Palette: high-contrast red / black / white */
+  --p5-red: #e60012;
+  --p5-red-dark: #9e000c;
+  --p5-black: #0b0b0b;
+  --p5-ink: #161616;
+  --p5-white: #f6f6f6;
+  --p5-gray: #8a8a8a;
+
+  /* Fonts mixed together for the ransom-note look (loaded in index.html) */
+  --font-heavy: "Anton", "Impact", sans-serif;
+  --font-block: "Archivo Black", "Arial Black", sans-serif;
+  --font-serif: "Abril Fatface", "Georgia", serif;
+  --font-mono: "Special Elite", "Courier New", monospace;
+  --font-wide: "Rubik Mono One", "Arial Black", sans-serif;
+  --font-tall: "Bebas Neue", "Impact", sans-serif;
+  --font-body: "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  /*
+    Easing curves (Lesson 04). The second number > 1 in --ease-slam is what
+    makes things overshoot and snap back, instead of gliding to a stop.
+  */
+  --ease-slam: cubic-bezier(0.2, 1.6, 0.4, 1);
+  --ease-snap: cubic-bezier(0.75, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Timing: Persona-style UI is FAST. Most motion finishes under 400ms. */
+  --dur-fast: 160ms;
+  --dur-med: 320ms;
+  --dur-slow: 600ms;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--p5-black);
+  color: var(--p5-white);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* Reusable texture helpers (Lesson 01) */
+.halftone {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.45) 1.6px, transparent 1.8px);
+  background-size: 9px 9px;
+}
+
+.starburst {
+  background: repeating-conic-gradient(
+    from 0deg at 30% 60%,
+    var(--p5-red) 0deg 9deg,
+    var(--p5-red-dark) 9deg 18deg
+  );
+}

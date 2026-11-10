@@ -1,0 +1,162 @@
+/* Layout for the lab itself (sidebar + lesson area). Not part of any lesson. */
+.app {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100%;
+}
+
+.sidebar {
+  background: var(--p5-ink);
+  border-right: 4px solid var(--p5-red);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar__title {
+  font-family: var(--font-heavy);
+  font-size: 40px;
+  letter-spacing: 1px;
+  margin: 0;
+  transform: rotate(-4deg);
+}
+
+.sidebar__title span {
+  background: var(--p5-red);
+  padding: 0 8px;
+  display: inline-block;
+  transform: skewX(-12deg);
+}
+
+.sidebar__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.sidebar__list a {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 8px 10px;
+  color: var(--p5-white);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background var(--dur-fast), transform var(--dur-fast) var(--ease-slam);
+}
+
+.sidebar__list a:hover,
+.sidebar__list a:focus-visible {
+  background: #2a2a2a;
+  transform: translateX(4px);
+  outline: none;
+}
+
+.sidebar__list a.is-active {
+  background: var(--p5-red);
+  transform: translateX(6px) skewX(-8deg);
+}
+
+.sidebar__num {
+  font-family: var(--font-heavy);
+  color: var(--p5-gray);
+}
+
+.sidebar__list a.is-active .sidebar__num {
+  color: var(--p5-black);
+}
+
+.sidebar__foot {
+  margin-top: auto;
+  font-size: 12px;
+  color: var(--p5-gray);
+}
+
+.lesson {
+  padding: 32px 40px 64px;
+  min-width: 0;
+}
+
+.lesson__eyebrow {
+  margin: 0;
+  color: var(--p5-red);
+  font-family: var(--font-heavy);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.lesson__title {
+  font-family: var(--font-heavy);
+  font-size: 48px;
+  margin: 0 0 8px;
+  line-height: 1;
+}
+
+.lesson__summary {
+  max-width: 70ch;
+  color: #cfcfcf;
+  margin: 0 0 4px;
+}
+
+.lesson__readme {
+  font-size: 13px;
+  color: var(--p5-gray);
+  margin: 0 0 24px;
+}
+
+code {
+  font-family: Consolas, "Courier New", monospace;
+  background: #222;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+/* Shared bits lessons reuse for their controls */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background: var(--p5-white);
+  color: var(--p5-black);
+  border: none;
+  padding: 8px 16px;
+  font-family: var(--font-heavy);
+  letter-spacing: 1px;
+  cursor: pointer;
+  clip-path: polygon(4% 0, 100% 0, 96% 100%, 0 100%);
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--p5-red);
+  color: var(--p5-white);
+  outline: none;
+}
+
+.note {
+  font-size: 14px;
+  color: #bdbdbd;
+  max-width: 70ch;
+}
+
+@media (max-width: 760px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    border-right: none;
+    border-bottom: 4px solid var(--p5-red);
+  }
+  .lesson {
+    padding: 24px 16px 48px;
+  }
+}

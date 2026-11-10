@@ -1,0 +1,34 @@
+/*
+  "Boil": two hand-drawn-looking frames that alternate. steps(1, end) holds each
+  keyframe's value until the next one instead of smoothly blending between them,
+  which is what makes it look like stop-motion instead of a wobble.
+*/
+@keyframes p5-boil {
+  0%,
+  100% {
+    transform: rotate(-1.2deg) translate(0, 0);
+  }
+  50% {
+    transform: rotate(1deg) translate(1px, -2px);
+  }
+}
+
+.boil {
+  display: inline-block;
+  animation: p5-boil 360ms steps(1, end) infinite;
+}
+
+.boil--smooth {
+  animation-timing-function: ease-in-out;
+}
+
+/* Slow ambient rotation for a background starburst. */
+@keyframes p5-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: p5-spin 60s linear infinite;
+}

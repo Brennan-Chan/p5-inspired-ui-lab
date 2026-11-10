@@ -1,0 +1,32 @@
+/*
+  Respect the operating system's "reduce motion" setting.
+  Windows: Settings > Accessibility > Visual effects > Animation effects (off)
+  macOS:   System Settings > Accessibility > Display > Reduce motion
+
+  Durations become 1ms instead of 0 on purpose: animations still *finish* and
+  fire `animationend`, so sequenced logic like Lesson 06's wipe keeps working.
+
+  This file is global. In your real site, import it once at the root.
+*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+/* Same rules, but switchable with a class, so the demo can simulate the setting. */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 1ms !important;
+  animation-delay: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
+  transition-delay: 0ms !important;
+}

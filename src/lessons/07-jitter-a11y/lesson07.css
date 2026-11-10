@@ -1,0 +1,60 @@
+.l07__h {
+  font-family: var(--font-heavy);
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin: 8px 0 14px;
+}
+
+.l07__pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  margin-bottom: 8px;
+}
+
+.l07__cell {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  padding: 20px 24px;
+  background: #1c1c1c;
+  border: 3px solid var(--p5-white);
+}
+
+.l07__check {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 14px;
+}
+
+.l07__stage {
+  position: relative;
+  height: 280px;
+  border: 3px solid var(--p5-white);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+}
+
+/* Oversized so the corners never show while it rotates. */
+.l07__burst {
+  position: absolute;
+  width: 200%;
+  aspect-ratio: 1;
+  left: -50%;
+  top: 50%;
+  margin-top: -100%;
+  background: repeating-conic-gradient(var(--p5-red) 0deg 9deg, var(--p5-red-dark) 9deg 18deg);
+}
+
+.l07__dots {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+}
+
+.l07__title {
+  position: relative;
+}

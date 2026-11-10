@@ -1,0 +1,83 @@
+.l04__h {
+  font-family: var(--font-heavy);
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin: 8px 0 14px;
+}
+
+.l04__check {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 14px;
+}
+
+.l04__race {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.l04__lane {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 4px 14px;
+  align-items: center;
+}
+
+.l04__track {
+  position: relative;
+  height: 34px;
+  background: #1c1c1c;
+  border-left: 3px solid var(--p5-white);
+  border-right: 3px dashed var(--p5-red);
+}
+
+.l04__runner {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 46px;
+  height: 26px;
+  background: var(--p5-red);
+  clip-path: polygon(0 0, 80% 0, 100% 50%, 80% 100%, 0 100%, 12% 50%);
+  animation: l04-run calc(900ms * var(--slowmo, 1)) var(--curve) 300ms both;
+}
+
+/* Move to the end of the track minus the runner's own width */
+@keyframes l04-run {
+  from {
+    left: 0;
+  }
+  to {
+    left: calc(100% - 46px);
+  }
+}
+
+.l04__note {
+  grid-column: 2;
+  font-size: 13px;
+  color: #bdbdbd;
+}
+
+.l04__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+
+.l04__item {
+  background: var(--p5-white);
+  color: var(--p5-black);
+  font-family: var(--font-heavy);
+  font-size: 30px;
+  padding: 4px 28px;
+}
+
+.l04__item:nth-child(odd) {
+  background: var(--p5-red);
+  color: var(--p5-white);
+}

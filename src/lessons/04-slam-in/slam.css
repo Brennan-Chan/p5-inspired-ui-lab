@@ -1,0 +1,24 @@
+/*
+  Reusable entrance animation. Add class="slam-in" and set --i (0, 1, 2...)
+  on each element to stagger them. Later lessons import this file.
+*/
+@keyframes p5-slam-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-140%) skewX(-25deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(8%) skewX(-6deg); /* overshoot past the target... */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) skewX(-10deg); /* ...then snap back */
+  }
+}
+
+.slam-in {
+  /* "both" = hold the 0% frame before starting and the 100% frame after ending */
+  animation: p5-slam-in calc(var(--dur-med) * var(--slowmo, 1)) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 55ms * var(--slowmo, 1));
+}

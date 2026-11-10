@@ -1,0 +1,61 @@
+.l01__h {
+  font-family: var(--font-heavy);
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin: 8px 0 14px;
+}
+
+.l01__swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.l01__swatch {
+  margin: 0;
+}
+
+.l01__chip {
+  height: 72px;
+  border: 3px solid var(--p5-white);
+  /* A small skew already makes a plain box feel "on-brand". */
+  transform: skewX(-8deg);
+}
+
+.l01__swatch figcaption {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #cfcfcf;
+}
+
+.l01__tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.l01__tile p {
+  font-size: 14px;
+  color: #cfcfcf;
+}
+
+.l01__sample {
+  position: relative;
+  height: 180px;
+  border: 3px solid var(--p5-white);
+  overflow: hidden;
+}
+
+.l01__sample--white {
+  background-color: var(--p5-white);
+}
+
+/* The overlay sits on top and multiplies its dark dots into the red below. */
+.l01__overlay {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+}

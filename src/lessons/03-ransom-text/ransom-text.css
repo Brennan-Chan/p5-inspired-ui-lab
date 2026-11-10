@@ -1,0 +1,41 @@
+.ransom {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  line-height: 1;
+  gap: 0.04em;
+}
+
+.ransom__char {
+  display: inline-block;
+  font-family: var(--font);
+  font-size: calc(1em * var(--scale));
+  transform: translateY(var(--lift)) rotate(var(--rot));
+  padding: 0.04em 0.08em;
+  text-transform: uppercase;
+}
+
+/* Every few letters gets "cut out" of a different piece of paper. */
+.ransom__char--plain {
+  color: var(--p5-white);
+}
+
+.ransom__char--inverse {
+  background: var(--p5-white);
+  color: var(--p5-black);
+}
+
+.ransom__char--boxed {
+  background: var(--p5-black);
+  color: var(--p5-white);
+  outline: 2px solid var(--p5-white);
+}
+
+.ransom__char--red {
+  background: var(--p5-red);
+  color: var(--p5-white);
+}
+
+.ransom__space {
+  width: 0.35em;
+}

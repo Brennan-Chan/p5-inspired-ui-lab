@@ -1,0 +1,53 @@
+.l03__field {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.l03__field input:not([type="range"]) {
+  background: #1d1d1d;
+  border: 2px solid var(--p5-white);
+  color: var(--p5-white);
+  padding: 8px 10px;
+  min-width: 240px;
+}
+
+.l03__stage {
+  position: relative;
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  border: 3px solid var(--p5-white);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.l03__dots {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+}
+
+.l03__stage .ransom {
+  position: relative; /* sit above the dots */
+}
+
+.l03__h {
+  font-family: var(--font-heavy);
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin: 28px 0 14px;
+}
+
+.l03__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.l03__mini {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}

@@ -1,0 +1,67 @@
+.l02__h {
+  font-family: var(--font-heavy);
+  font-size: 22px;
+  letter-spacing: 1px;
+  margin: 8px 0 18px;
+}
+
+.l02__steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  margin-bottom: 40px;
+  align-items: start;
+}
+
+.l02__plain {
+  background: var(--p5-black);
+  border: 3px solid var(--p5-white);
+  padding: 28px 36px;
+  font-family: var(--font-heavy);
+  font-size: 24px;
+}
+
+.l02__plain--clipped {
+  clip-path: polygon(3% 5%, 100% 0, 96% 97%, 0 100%);
+}
+
+.jagged .jagged__content {
+  font-family: var(--font-heavy);
+  font-size: 24px;
+}
+
+.l02__stage {
+  padding: 40px 20px 50px;
+  max-width: 520px;
+}
+
+.l02__panelTitle {
+  margin: 0 0 6px;
+  font-size: 34px;
+}
+
+.l02__stage p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  margin: 0;
+}
+
+.l02 label {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.l02 .btn[aria-pressed="true"] {
+  background: var(--p5-red);
+  color: var(--p5-white);
+}
+
+.l02__code {
+  background: #1a1a1a;
+  border-left: 4px solid var(--p5-red);
+  padding: 14px 16px;
+  font-size: 13px;
+  overflow-x: auto;
+  max-width: 100%;
+}

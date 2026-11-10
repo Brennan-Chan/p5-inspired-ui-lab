@@ -1,0 +1,41 @@
+/*
+  Why two wrappers?
+  clip-path cuts away EVERYTHING outside the polygon, including borders and
+  box-shadows on the same element. So the outline is drawn on the PARENT with
+  filter: drop-shadow(), which traces whatever shape its child ended up as.
+*/
+.jagged {
+  transform: rotate(var(--tilt, 0deg));
+  filter: drop-shadow(3px 0 0 var(--p5-white)) drop-shadow(-3px 0 0 var(--p5-white))
+    drop-shadow(0 3px 0 var(--p5-white)) drop-shadow(0 -3px 0 var(--p5-white))
+    drop-shadow(10px 10px 0 var(--p5-red));
+}
+
+.jagged__shape {
+  clip-path: var(--clip);
+  transform: skewX(var(--skew, 0deg));
+  padding: 28px 36px;
+  background: var(--p5-black);
+}
+
+/* Undo the skew for the contents so text stays upright and readable. */
+.jagged__content {
+  transform: skewX(calc(var(--skew, 0deg) * -1));
+}
+
+.jagged--white .jagged__shape {
+  background: var(--p5-white);
+  color: var(--p5-black);
+}
+
+.jagged--red .jagged__shape {
+  background: var(--p5-red);
+  color: var(--p5-white);
+}
+
+/* On a white panel the white outline disappears, so swap it for black. */
+.jagged--white {
+  filter: drop-shadow(3px 0 0 var(--p5-black)) drop-shadow(-3px 0 0 var(--p5-black))
+    drop-shadow(0 3px 0 var(--p5-black)) drop-shadow(0 -3px 0 var(--p5-black))
+    drop-shadow(10px 10px 0 var(--p5-red));
+}

@@ -33,7 +33,7 @@ Other scripts:
 Each lesson is its own git commit with a tag, so you can watch the project grow:
 
 ```bash
-git tag                    # lesson-00 ... lesson-09
+git tag                    # lesson-00 ... lesson-10
 git checkout lesson-01     # the project as it was after Lesson 01
 npm run dev                # see just that lesson
 git checkout main          # back to the finished version
@@ -54,6 +54,7 @@ Each lesson folder has a `README.md` walkthrough (concept, analogy, key code, th
 | 07 | [Jitter & a11y](src/lessons/07-jitter-a11y/README.md) | `steps()` stop-motion, ambient motion, `prefers-reduced-motion` |
 | 08 | [Pause menu](src/lessons/08-pause-menu/README.md) | Composing everything; what to port to a real site |
 | 09 | [Morph cursor](src/lessons/09-morph-cursor/README.md) | A wobbling red/cyan cursor (`mix-blend-mode: screen`, interpolated `clip-path`), render props, hover/press animations. Upgrades the pause menu. |
+| 10 | [Drag sheet](src/lessons/10-drag-sheet/README.md) | Pointer Events, pointer capture, `touch-action`, drag-driven CSS variables, `@property`, flick velocity, snapping |
 
 ---
 
@@ -116,6 +117,7 @@ Reusable components (the parts worth porting):
 | `usePrefersReducedMotion` + `motion-safety.css` | `src/lessons/07-jitter-a11y/` |
 | `PauseMenu` | `src/lessons/08-pause-menu/PauseMenu.tsx` |
 | `MorphCursor` | `src/lessons/09-morph-cursor/MorphCursor.tsx` |
+| `DragSheet` | `src/lessons/10-drag-sheet/DragSheet.tsx` |
 
 ---
 

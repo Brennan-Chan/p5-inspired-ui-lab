@@ -1,0 +1,175 @@
+/*
+  --p is the drag progress: 0 = closed, 1 = open. JS writes it on every move.
+  Registering it with @property tells the browser it's a NUMBER, which is what
+  lets a CSS transition animate it smoothly when the sheet snaps open/closed.
+  (An unregistered custom property would just jump to the new value.)
+*/
+@property --p {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/* --y is the sheet's offset in px (0 = fully open). Same idea: registered so it can transition. */
+@property --y {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+/*
+  JS only ever writes two variables on this element: --y and --p.
+  Every moving part below reads them, so one snap transition here moves
+  the sheet, the wipe band, the dimming and the text fades in perfect sync.
+*/
+.sheet-stage {
+  --p: 0;
+  --snap: 340ms cubic-bezier(0.2, 1.15, 0.35, 1); /* slight overshoot when it lands */
+  --sheet-h: 78%; /* open height; the rest of the page stays visible to tap-close */
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: --p var(--snap), --y var(--snap);
+}
+
+/* While a finger is down, no transitions: everything must track it 1:1. */
+.sheet-stage.is-dragging {
+  transition: none;
+}
+
+.sheet-stage__page {
+  position: absolute;
+  inset: 0;
+}
+
+/* Backdrop darkens as you drag. Click it to close. */
+.sheet-stage__dim {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: calc(var(--p) * 0.55);
+  pointer-events: none;
+}
+
+.sheet-stage.is-open .sheet-stage__dim {
+  pointer-events: auto;
+}
+
+/*
+  The wipe: two slanted bands (black, then red) that ride on top of the sheet
+  and stick out further the more you drag: lead = --p x 90px / 50px.
+  Closed (--p = 0) they sit exactly behind the sheet, invisible.
+*/
+.sheet-stage__wipe,
+.sheet-stage__wipe::after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--sheet-h);
+  pointer-events: none; /* never block taps on the backdrop */
+  clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
+}
+
+.sheet-stage__wipe {
+  background: var(--p5-black);
+  transform: translateY(calc(var(--y) - var(--p) * 90px));
+}
+
+.sheet-stage__wipe::after {
+  content: "";
+  background: var(--p5-red);
+  height: 100%;
+  transform: translateY(calc(var(--p) * 40px)); /* 40px lower than the black = 50px lead */
+}
+
+.sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--sheet-h);
+  display: flex;
+  flex-direction: column;
+  background: var(--p5-white);
+  color: var(--p5-black);
+  clip-path: polygon(0 4%, 100% 0, 100% 100%, 0 100%); /* slanted top edge */
+  transform: translateY(var(--y));
+  will-change: transform; /* hint: keep this on its own GPU layer */
+}
+
+.sheet__handle {
+  /* THE key line for touch: tell the browser this element handles vertical
+     drags itself, so a swipe here doesn't scroll the page instead. */
+  touch-action: none;
+  flex: none;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  width: 100%;
+  min-height: 72px; /* comfortably larger than the 44px minimum touch target */
+  padding: 14px 16px 10px;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: grab;
+  user-select: none;
+}
+
+.is-dragging .sheet__handle {
+  cursor: grabbing;
+}
+
+.sheet__handle:focus-visible {
+  outline: 3px solid var(--p5-red);
+  outline-offset: -6px;
+}
+
+.sheet__grip {
+  width: 56px;
+  height: 6px;
+  background: var(--p5-black);
+  transform: skewX(-20deg);
+}
+
+/* Hint fades out in the first ~third of the drag; title fades in after it. */
+.sheet__hint {
+  font-family: var(--font-heavy);
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: calc(1 - var(--p) * 3);
+  animation: sheet-nudge 1.6s var(--ease-out) infinite;
+}
+
+.sheet__title {
+  font-family: var(--font-heavy);
+  font-size: 30px;
+  line-height: 1;
+  opacity: calc(var(--p) * 3 - 1);
+  translate: 0 calc((1 - var(--p)) * 12px);
+}
+
+/* A gentle "this moves up" nudge on the hint while closed. */
+@keyframes sheet-nudge {
+  0%,
+  60%,
+  100% {
+    translate: 0 0;
+  }
+  30% {
+    translate: 0 -4px;
+  }
+}
+
+.is-open .sheet__hint {
+  animation: none;
+}
+
+.sheet__body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain; /* scrolling the sheet won't scroll the page behind it */
+  padding: 4px 28px 28px;
+  opacity: calc(var(--p) * 1.5 - 0.3);
+}

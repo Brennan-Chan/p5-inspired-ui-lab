@@ -1,0 +1,102 @@
+.l10__layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* A phone-shaped stage for the demo */
+.l10__phone {
+  width: 375px;
+  max-width: 100%;
+  height: 640px;
+  border: 3px solid var(--p5-white);
+  border-radius: 28px;
+  background: var(--p5-black);
+}
+
+.l10__page {
+  position: absolute;
+  inset: 0;
+}
+
+.l10__dots {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+}
+
+.l10__meter {
+  position: absolute;
+  top: 18px;
+  left: 24px;
+  right: 24px;
+  height: 18px;
+  background: var(--p5-black);
+  border: 2px solid var(--p5-white);
+}
+
+.l10__meterFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(clamp(0, var(--p), 1) * 100%);
+  background: var(--p5-white);
+}
+
+.l10__meterLabel {
+  position: absolute;
+  right: 6px;
+  top: -1px;
+  font-size: 11px;
+  background: none;
+  color: var(--p5-red);
+  padding: 0;
+}
+
+.l10__hero {
+  position: relative;
+  padding: 72px 28px 0;
+  display: grid;
+  gap: 28px;
+  justify-items: start;
+}
+
+.l10__cardTitle {
+  font-family: var(--font-heavy);
+  font-size: 30px;
+  margin: 0 0 6px;
+}
+
+.l10__cardText {
+  font-family: var(--font-body);
+  font-size: 14px;
+  margin: 0;
+}
+
+.l10 .sheet__body h4 {
+  font-family: var(--font-heavy);
+  font-size: 20px;
+  margin: 18px 0 4px;
+  color: var(--p5-red);
+}
+
+.l10 .sheet__body p {
+  margin: 0;
+  font-size: 15px;
+}
+
+.l10 .sheet__body a {
+  color: var(--p5-black);
+  font-weight: 700;
+}
+
+.l10__filler {
+  margin-top: 18px !important;
+  padding-bottom: 240px; /* enough text to make the body scroll */
+  color: #555;
+}
+
+.l10__meter-wrap {
+  flex: 1;
+  min-width: 240px;
+}

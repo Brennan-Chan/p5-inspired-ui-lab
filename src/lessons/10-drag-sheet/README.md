@@ -127,6 +127,30 @@ Other accessibility details:
 
 ---
 
+## 6. Making the background react to the drag
+
+Because `--p` is set on the stage and CSS variables **inherit**, *anything* inside the stage can read it, including the page behind the sheet. No extra JavaScript needed:
+
+```css
+.l10__burst {                                  /* the starburst behind the page */
+  rotate: calc(var(--p) * 140deg);             /* turns as you pull */
+  scale:  calc(1 + var(--p) * 0.3);            /* and zooms in a little */
+}
+.l10__hero {                                   /* the title + card in front */
+  translate: 0 calc(var(--p) * -48px);         /* lifts */
+  scale:     calc(1 - var(--p) * 0.08);        /* and shrinks slightly */
+}
+```
+
+- **It's tied to the pull, not to time.** Drag 100px and it turns about 33°; drag back down and it un-turns. Stop and it stops.
+- **The snap carries it through.** On release, `--p` transitions to 0 or 1 (that's the `@property` from section 3), so the spin finishes the turn smoothly and even overshoots a hair with the sheet.
+- **Two depths = parallax.** The background turns and zooms while the foreground slides, so they move by different amounts. That difference is what your eye reads as depth.
+- **Ambient + drag add together.** The burst also has `.spin-slow` from Lesson 07, which animates `transform`. The drag uses the separate `rotate` property, so the two rotations stack instead of overwriting each other: a slow idle drift, plus the extra turn from your pull.
+
+**Analogy:** the sheet's handle is a crank. Turning it lifts the sheet *and* drives a gear (the starburst) through the same axle (`--p`).
+
+Swap in your own mapping: `calc(var(--p) * 360deg)` for a full turn, a negative number to spin the other way, or `translate` on a background photo for a vertical parallax scroll.
+
 ## Try it
 
 1. Change `FLICK_SPEED` to `0.2` (twitchy) and `1.2` (needs a hard flick).

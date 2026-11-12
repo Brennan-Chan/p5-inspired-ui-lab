@@ -1,6 +1,7 @@
 import DragSheet from "./DragSheet";
 import RansomText from "../03-ransom-text/RansomText";
 import JaggedPanel from "../02-jagged-panels/JaggedPanel";
+import "../07-jitter-a11y/stop-motion.css";
 import "./lesson10.css";
 
 export default function Lesson10() {
@@ -11,7 +12,10 @@ export default function Lesson10() {
           className="l10__phone"
           title="Project details"
           background={
-            <div className="l10__page starburst">
+            <div className="l10__page">
+              {/* Oversized burst that rotates with the drag (rotate: --p) AND
+                  drifts slowly on its own (spin-slow animates transform) */}
+              <div className="l10__burst spin-slow" />
               <div className="l10__dots halftone" />
               {/* Reads --p straight from CSS: no React state involved */}
               <div className="l10__meter" aria-hidden="true">

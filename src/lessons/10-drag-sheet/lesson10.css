@@ -18,6 +18,38 @@
 .l10__page {
   position: absolute;
   inset: 0;
+  overflow: hidden;
+  background: var(--p5-red-dark);
+}
+
+/*
+  Drag-linked background: it reads the same --p as the sheet (it inherits it
+  from .sheet-stage), so it turns exactly as far as you've pulled.
+  - rotate / scale:  driven by the drag (--p)
+  - transform:       driven by the slow ambient spin animation (.spin-slow)
+  They're separate CSS properties, so the two motions ADD instead of overriding.
+  When the sheet snaps, --p transitions (thanks to @property), so the spin
+  finishes the turn smoothly, and overshoots with the sheet.
+*/
+.l10__burst {
+  position: absolute;
+  width: 260%;
+  aspect-ratio: 1;
+  left: -80%;
+  top: 62%;
+  margin-top: -130%; /* center the oversized square on the page's lower half */
+  background: repeating-conic-gradient(var(--p5-red) 0deg 9deg, var(--p5-red-dark) 9deg 18deg);
+  rotate: calc(var(--p) * 140deg);
+  scale: calc(1 + var(--p) * 0.3);
+  animation-duration: 90s; /* slower ambient drift than the Lesson 07 default */
+}
+
+/* Foreground parallax: the content lifts and shrinks a little as the sheet rises,
+   so the background (turning) and foreground (sliding) move at different "depths". */
+.l10__hero {
+  translate: 0 calc(var(--p) * -48px);
+  scale: calc(1 - var(--p) * 0.08);
+  transform-origin: top center;
 }
 
 .l10__dots {
